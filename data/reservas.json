@@ -1,0 +1,53 @@
+[
+  {
+    "id": "6d3dbbcd-148b-41fe-8196-b37632426e98",
+    "nome": "correa",
+    "email": "wesleybairroscorrea40@gmail.com",
+    "data": "2049-08-10",
+    "mesa": "Sala Privativa 1",
+    "status": "cancelada",
+    "criadaEm": "2026-08-11T11:59:08.590Z",
+    "atualizadaEm": "2026-08-11T13:02:42.589Z"
+  },
+  {
+    "id": "1246ad0f-4c10-4f4b-a6b3-49f8e0a8f3bc",
+    "codigo": "IW-641CCA",
+    "nome": "Mingau",
+    "email": "agiotapato27@gmail.com",
+    "data": "9000-10-06",
+    "mesa": "B02",
+    "status": "cancelada",
+    "criadaEm": "2026-08-11T12:20:48.079Z",
+    "atualizadaEm": "2026-08-11T13:02:44.756Z"
+  },
+  {
+    "id": "5c22fe73-f05b-4a66-9ee9-3af7b8af5e50",
+    "codigo": "IW-C04B47",
+    "nome": "nigger",
+    "email": "kauanpetry0109@gmail.com",
+    "data": "2069-08-10",
+    "mesa": "Sala Privativa 1",
+    "status": "cancelada",
+    "criadaEm": "2026-08-11T12:53:55.923Z",
+    "emailEntrega": {
+      "status": "falhou",
+      "motivo": "You can only send testing emails to your own email address (agiotapato27@gmail.com). To send emails to other recipients, please verify a domain at resend.com/domains, and change the `from` address to an email using this domain."
+    },
+    "atualizadaEm": "2026-08-11T13:03:08.868Z"
+  },
+  {
+    "id": "6804ac81-5ef6-4e69-beac-2db08a9997bb",
+    "codigo": "IW-AE3C89",
+    "nome": "nigga",
+    "email": "agiotapato27@gmail.com",
+    "data": "2069-08-10",
+    "mesa": "A01",
+    "status": "cancelada",
+    "criadaEm": "2026-08-11T12:55:00.684Z",
+    "emailEntrega": {
+      "status": "enviado",
+      "id": "77371a40-ea80-4281-a5c6-a895c4150ee2"
+    },
+    "atualizadaEm": "2026-08-11T13:03:11.497Z"
+  }
+]

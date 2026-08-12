@@ -1,0 +1,10 @@
+services:
+  portal:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - reservas_data:/app/data
+volumes:
+  reservas_data:

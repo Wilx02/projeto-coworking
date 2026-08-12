@@ -1,0 +1,10 @@
+{
+  "name": "inova-work-portal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portal corporativo de reservas do Inova Work",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  }
+}
