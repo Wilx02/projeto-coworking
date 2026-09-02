@@ -1,13 +1,15 @@
 const $ = s => document.querySelector(s);
 const data = $('#data'), mesa = $('#mesa'), form = $('#formReserva'), mensagem = $('#mensagem'), mapa = $('#mapaMesas');
 let todasMesas = [];
-data.min = new Date().toISOString().slice(0, 10);
+data.min = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' });
 async function carregarMesas() {
   if (!data.value) return; mesa.innerHTML = '<option>Carregando estações...</option>';
+  try {
   const [m, r] = await Promise.all([fetch('/api/mesas').then(x => x.json()), fetch(`/api/reservas?data=${data.value}`).then(x => x.json())]);
   todasMesas = m.mesas; const ocupadas = new Set(r.reservas.map(x => x.mesa));
   mesa.innerHTML = '<option value="">Selecione uma estação</option>' + todasMesas.map(x => `<option value="${x}" ${ocupadas.has(x) ? 'disabled' : ''}>${x}${ocupadas.has(x) ? ' — indisponível' : ''}</option>`).join('');
   mapa.innerHTML = todasMesas.map(x => `<span class="${ocupadas.has(x) ? 'ocupada' : 'livre'}">${x}<small>${ocupadas.has(x) ? 'ocupada' : 'livre'}</small></span>`).join('');
+  } catch { mesa.innerHTML = '<option value="">Não foi possível carregar as estações</option>'; mapa.innerHTML = ''; }
 }
 data.addEventListener('change', carregarMesas);
 form.addEventListener('submit', async e => { e.preventDefault(); mensagem.textContent = 'Confirmando…'; mensagem.className = ''; const payload = Object.fromEntries(new FormData(form));

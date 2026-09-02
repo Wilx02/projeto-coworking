@@ -1,3 +1,4 @@
+try { process.loadEnvFile(); } catch { /* .env ausente: segue sem ele */ }
 const http = require('node:http');
 const https = require('node:https');
 const fs = require('node:fs/promises');
@@ -46,7 +47,7 @@ async function enviarConfirmacao(reserva) {
   return { status: 'enviado', id: retorno.id };
 }
 function responder(res, status, corpo, tipo = 'application/json') { res.writeHead(status, { 'Content-Type': `${tipo}; charset=utf-8`, 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-store', 'Referrer-Policy': 'same-origin' }); res.end(tipo === 'application/json' ? JSON.stringify(corpo) : corpo); }
-function corpoJson(req) { return new Promise((resolve, reject) => { let dados = ''; req.on('data', p => { dados += p; if (dados.length > 100000) reject(falha('Requisição muito grande.')); }); req.on('end', () => { try { resolve(JSON.parse(dados || '{}')); } catch { reject(falha('JSON inválido.')); } }); }); }
+function corpoJson(req) { return new Promise((resolve, reject) => { let dados = ''; req.on('data', p => { dados += p; if (dados.length > 100000) reject(falha('Requisição muito grande.')); }); req.on('error', () => reject(falha('Conexão interrompida.'))); req.on('end', () => { try { resolve(JSON.parse(dados || '{}')); } catch { reject(falha('JSON inválido.')); } }); }); }
 const handler = async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
   try {
@@ -74,9 +75,15 @@ const handler = async (req, res) => {
 };
 const app = http.createServer(handler);
 if (require.main === module) iniciarBase().then(async () => {
-  const pfx = await fs.readFile(CERT);
-  const servidor = https.createServer({ pfx, passphrase: process.env.HTTPS_PFX_PASSWORD || 'inova-work-local' }, handler);
-  servidor.on('error', erro => console.error(`Não foi possível iniciar o servidor HTTPS: ${erro.message}`));
-  servidor.listen(PORT, () => console.log(`Inova Work disponível em https://localhost:${PORT}`));
+  try {
+    const pfx = await fs.readFile(CERT);
+    const servidor = https.createServer({ pfx, passphrase: process.env.HTTPS_PFX_PASSWORD || 'inova-work-local' }, handler);
+    servidor.on('error', erro => console.error(`Não foi possível iniciar o servidor HTTPS: ${erro.message}`));
+    servidor.listen(PORT, () => console.log(`Inova Work disponível em https://localhost:${PORT}`));
+  } catch {
+    const servidor = http.createServer(handler);
+    servidor.on('error', erro => console.error(`Não foi possível iniciar o servidor HTTP: ${erro.message}`));
+    servidor.listen(PORT, () => console.log(`Inova Work disponível em http://localhost:${PORT} (sem HTTPS: certificado local ausente)`));
+  }
 });
 module.exports = { app, iniciarBase };

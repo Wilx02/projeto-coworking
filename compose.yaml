@@ -4,6 +4,10 @@ services:
     restart: unless-stopped
     ports:
       - "3000:3000"
+    environment:
+      - ADMIN_TOKEN=${ADMIN_TOKEN:-inova-work-dev}
+      - RESEND_API_KEY=${RESEND_API_KEY:-}
+      - EMAIL_FROM=${EMAIL_FROM:-Inova Work <onboarding@resend.dev>}
     volumes:
       - reservas_data:/app/data
 volumes:

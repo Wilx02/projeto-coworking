@@ -77,5 +77,34 @@
       "status": "nao_configurado"
     },
     "atualizadaEm": "2026-09-01T11:21:02.220Z"
+  },
+  {
+    "id": "c1b1b8ea-de89-40c3-9fc8-2c56ca4268c2",
+    "codigo": "IW-155545",
+    "nome": "weley",
+    "email": "agiotapato27@gmail.com",
+    "data": "2030-06-10",
+    "mesa": "Sala Privativa 1",
+    "status": "confirmada",
+    "criadaEm": "2026-09-02T11:17:03.408Z",
+    "emailEntrega": {
+      "status": "nao_configurado"
+    },
+    "atualizadaEm": "2026-09-02T11:17:03.410Z"
+  },
+  {
+    "id": "e9b8a5b2-c6f5-4e1b-b2ab-d2c497b431dd",
+    "codigo": "IW-1229B0",
+    "nome": "nigga",
+    "email": "kauanpetry01092009@gmail.com",
+    "data": "2026-09-10",
+    "mesa": "Sala Privativa 1",
+    "status": "confirmada",
+    "criadaEm": "2026-09-02T11:30:47.757Z",
+    "emailEntrega": {
+      "status": "falhou",
+      "motivo": "You can only send testing emails to your own email address (agiotapato27@gmail.com). To send emails to other recipients, please verify a domain at resend.com/domains, and change the `from` address to an email using this domain."
+    },
+    "atualizadaEm": "2026-09-02T11:30:48.143Z"
   }
 ]
